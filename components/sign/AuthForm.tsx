@@ -7,6 +7,7 @@ import Input from "../inputs/Input";
 import Button from "../Button";
 import AuthSocialButton from "../AuthSocialButton";
 import { BsGithub, BsGoogle } from "react-icons/bs";
+import axios from "axios";
 
 type Variant = "LOGIN" | "REGISTER";
 
@@ -38,6 +39,7 @@ const AuthForm = () => {
     setIsLoading(true);
     if (variant === "REGISTER") {
       //  Axios Register
+      axios.post("http://localhost:3000/api/register", data);
     }
     if (variant === "LOGIN") {
       //  NextAuth Signin
