@@ -51,6 +51,7 @@ const AuthForm = () => {
       //  Axios Register
       axios
         .post("http://localhost:3000/api/register", data)
+        .then(() => signIn("credentials", data))
         .catch(() => toast.error("Something went wrong"))
         .finally(() => setIsLoading(false));
     }
@@ -65,6 +66,7 @@ const AuthForm = () => {
             toast.error("Invalid credentials");
           }
           if (callback?.ok && !callback?.error) {
+            router.push("/users");
             toast.success("Logged in");
           }
         })
