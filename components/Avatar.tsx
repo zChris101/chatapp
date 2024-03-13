@@ -8,6 +8,7 @@ interface AvatarProps {
 }
 
 const Avatar = ({ user }: AvatarProps) => {
+  // 02:58:40 saved
   return (
     <div className="relative">
       <div
