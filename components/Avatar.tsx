@@ -1,6 +1,7 @@
 "use client";
 
 import { User } from "@prisma/client";
+import Image from "next/image";
 
 interface AvatarProps {
   user?: User;
@@ -21,7 +22,11 @@ const Avatar = ({ user }: AvatarProps) => {
          md:w-11
         "
       >
-        Avatar
+        <Image
+          alt="user logo"
+          src={user?.image || "/images/placeholder.jpg"}
+          fill
+        />
       </div>
     </div>
   );
