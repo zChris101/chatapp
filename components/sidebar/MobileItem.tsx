@@ -17,6 +17,7 @@ const MobileItem = ({ href, icon: Icon, active, onClick }: MobileItemProps) => {
     }
   };
 
+  // 02:41:04 checkpoint
   return (
     <Link
       href={href}
