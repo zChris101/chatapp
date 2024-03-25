@@ -12,7 +12,10 @@ interface MessageBoxProps {
   isLast?: boolean;
 }
 
+
+
 const MessageBox = ({ data, isLast }: MessageBoxProps) => {
+
   const session = useSession();
 
   const isOwn = session?.data?.user?.email === data?.sender?.email;
@@ -20,6 +23,8 @@ const MessageBox = ({ data, isLast }: MessageBoxProps) => {
     .filter((user) => user.email !== data?.sender?.email)
     .map((user) => user.email)
     .join(", ");
+
+
 
   const container = clsx("flex gap-3 p-4", isOwn && "justify-end");
 
@@ -64,6 +69,17 @@ const MessageBox = ({ data, isLast }: MessageBoxProps) => {
             <div>{data.body}</div>
           )}
         </div>
+        {isLast && isOwn && seenList.length > 0 && (
+          <div 
+           className="
+              text-xs
+              font-light
+              text-gray-500
+           "
+          >
+            {`Seen by ${seenList}`}
+          </div>
+        )}
       </div>
     </div>
   );
