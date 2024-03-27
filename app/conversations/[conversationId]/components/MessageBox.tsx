@@ -13,7 +13,6 @@ interface MessageBoxProps {
 }
 
 
-
 const MessageBox = ({ data, isLast }: MessageBoxProps) => {
 
   const session = useSession();
@@ -37,6 +36,8 @@ const MessageBox = ({ data, isLast }: MessageBoxProps) => {
     isOwn ? "bg-sky-500 text-white" : "bg-gray-100",
     data.image ? "rounded-md p-0" : "rounded-full py-2 px-3"
   );
+
+  const seenStatus = isLast && isOwn && seenList.length > 0
 
   return (
     <div className={container}>
@@ -69,17 +70,15 @@ const MessageBox = ({ data, isLast }: MessageBoxProps) => {
             <div>{data.body}</div>
           )}
         </div>
-        {isLast && isOwn && seenList.length > 0 && (
-          <div 
-           className="
+        {seenStatus && (<div  className="
               text-xs
               font-light
-              text-gray-500
-           "
-          >
+              text-gray-500"
+            >
             {`Seen by ${seenList}`}
           </div>
-        )}
+        )
+      }
       </div>
     </div>
   );
