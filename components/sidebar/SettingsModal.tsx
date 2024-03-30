@@ -120,7 +120,7 @@ const SettingsModal = ({
                   <CldUploadButton
                     options={{ maxFiles: 1 }}
                     onSuccess={handleUpload}
-                    uploadPreset="pgc9ehd5"
+                    uploadPreset="xrhzgw7a"
                   >
                     <Button disabled={isLoading} secondary type="button">
                       Change
