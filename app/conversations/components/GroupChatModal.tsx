@@ -1,5 +1,6 @@
 "use client";
 
+import Button from "@/components/Button";
 import Modal from "@/components/Modal";
 import Input from "@/components/inputs/Input";
 import Select from "@/components/inputs/Select";
@@ -70,28 +71,51 @@ const GroupChatModal = ({ isOpen, onClose, users }: GroupChatModalProps) => {
               Create a chat with more than 2 people
             </p>
             <div className="mt-10 flex flex-col gap-y-8">
-              <Input 
+              <Input
                 disabled={isLoading}
-                label="Name" 
-                id="name" 
-                errors={errors} 
-                required 
+                label="Name"
+                id="name"
+                errors={errors}
+                required
                 register={register}
               />
               <Select
                 disabled={isLoading}
-                label="Members" 
-                options={users.map((user) => ({ 
-                  value: user.id, 
-                  label: user.name 
-                }))} 
-                onChange={(value) => setValue('members', value, { 
-                  shouldValidate: true 
-                })} 
+                label="Members"
+                options={users.map((user) => ({
+                  value: user.id,
+                  label: user.name,
+                }))}
+                onChange={(value) =>
+                  setValue("members", value, {
+                    shouldValidate: true,
+                  })
+                }
                 value={members}
               />
             </div>
           </div>
+        </div>
+        <div
+          className="
+          mt-6
+          flex
+          items-center
+          justify-end
+          gap-x-6
+         "
+        >
+          <Button
+            disabled={isLoading}
+            onClick={onClose}
+            type="button"
+            secondary
+          >
+            Cancel
+          </Button>
+          <Button disabled={isLoading} type="submit">
+            Create
+          </Button>
         </div>
       </form>
     </Modal>
