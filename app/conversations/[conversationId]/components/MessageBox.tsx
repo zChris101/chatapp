@@ -6,24 +6,23 @@ import clsx from "clsx";
 import { format } from "date-fns";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { useState } from "react";
+import ImageModal from "./ImageModal";
 
 interface MessageBoxProps {
   data: FullMessageType;
   isLast?: boolean;
 }
 
-
 const MessageBox = ({ data, isLast }: MessageBoxProps) => {
-
   const session = useSession();
+  const [imageModalOpen, setImageModalOpen] = useState(false);
 
   const isOwn = session?.data?.user?.email === data?.sender?.email;
   const seenList = (data.seen || [])
     .filter((user) => user.email !== data?.sender?.email)
     .map((user) => user.email)
     .join(", ");
-
-
 
   const container = clsx("flex gap-3 p-4", isOwn && "justify-end");
 
@@ -37,7 +36,7 @@ const MessageBox = ({ data, isLast }: MessageBoxProps) => {
     data.image ? "rounded-md p-0" : "rounded-full py-2 px-3"
   );
 
-  const seenStatus = isLast && isOwn && seenList.length > 0
+  const seenStatus = isLast && isOwn && seenList.length > 0;
 
   return (
     <div className={container}>
@@ -52,8 +51,14 @@ const MessageBox = ({ data, isLast }: MessageBoxProps) => {
           </div>
         </div>
         <div className={message}>
+          <ImageModal
+            src={data.image}
+            isOpen={imageModalOpen}
+            onClose={() => setImageModalOpen(false)}
+          />
           {data.image ? (
             <Image
+              onClick={() => setImageModalOpen(true)}
               alt="Image"
               src={data.image}
               height="288"
@@ -70,15 +75,16 @@ const MessageBox = ({ data, isLast }: MessageBoxProps) => {
             <div>{data.body}</div>
           )}
         </div>
-        {seenStatus && (<div  className="
+        {seenStatus && (
+          <div
+            className="
               text-xs
               font-light
               text-gray-500"
-            >
+          >
             {`Seen by ${seenList}`}
           </div>
-        )
-      }
+        )}
       </div>
     </div>
   );
