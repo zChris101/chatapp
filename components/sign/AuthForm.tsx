@@ -50,7 +50,7 @@ const AuthForm = () => {
     if (variant === "REGISTER") {
       //  Axios Register
       axios
-        .post("http://localhost:3000/api/register", data)
+        .post("http://chatapp-nine-phi.vercel.app/api/register", data)
         .then(() => signIn("credentials", data))
         .catch(() => toast.error("Something went wrong"))
         .finally(() => setIsLoading(false));
